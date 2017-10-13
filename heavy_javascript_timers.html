@@ -1,0 +1,17 @@
+<div id = "counter"></div>
+<script>
+var last_time;
+setTimeout(function tick() {
+  var passed_time = new Date() - last_time;
+  console.log(passed_time);
+  if (last_time) {
+    window.top.postMessage(passed_time, '*');
+  }
+
+  for (var i = 0; i < 500000; ++i) {
+    document.getElementById('counter').innerHTML = i / (i + 5);
+  }
+  last_time = new Date();
+  setTimeout(tick, 100);
+}, 100);
+</script>
