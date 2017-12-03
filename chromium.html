@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Chromium commits</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="stats.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
+          <div class="row">
+            <div class="col-sm-3 col-md-4"></div>
+            <h1 class="page-header">Upstreamed commits</h1>
+          </div>
+          <table class="table row" style="font-size:12pt">
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Who</th>
+                <th>What</th>
+                <th>Where</th>
+              </tr>
+            </thead>
+            
+          <tr>
+            <td class="no-wrap-column">2017-11-08</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody0">
+                Convert NULL and 0 to nullptr in base using clang-tidy.
+
+              </a>
+              <div class="collapse" id="commitBody0">
+                <br>Steps to replicate:<br>
+1. Build clang-tidy and clang-apply-replacements as described here: <a href="https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md">https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md</a><br>
+2. Build targets necessary for the change in out/gn.<br>
+3. Generate the compilation database:<br>
+  tools/clang/scripts/generate_compdb.py -p out/gn > compile_commands.json<br>
+4. Run clang-tidy and apply replacements:<br>
+  cd out/gn && PATH_TO_RUN_CLANG_TIDY/run-clang-tidy.py -p ../../ -clang-tidy-binary PATH_TO_CLANG_TIDY_BINARY -clang-apply-replacements-binary PATH_TO_CLANG_APPLY_REPLACEMENTS_BINARY -checks=-*,modernize-use-nullptr -fix -j 8 DIR_TO_CONVERT<br>
+<br>
+Bug: 403854, 776257<br>
+Change-Id: I920f43d09b9fab758a3b8663fcf0c405d8519ad4<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/732105">https://chromium-review.googlesource.com/732105</a><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Reviewed-by: danakj <danakj@chromium.org><br>
+Cr-Commit-Position: refs/heads/master@{#514808}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-11-01</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody1">
+                Convert 0 to nullptr in content using clang-tidy.
+
+              </a>
+              <div class="collapse" id="commitBody1">
+                <br>Bug: 778942<br>
+Cq-Include-Trybots: master.tryserver.chromium.linux:linux_site_isolation<br>
+Change-Id: Iee6be84c23149c745b3afd6e6158764f92ccd17f<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/732305">https://chromium-review.googlesource.com/732305</a><br>
+Reviewed-by: Daniel Cheng <dcheng@chromium.org><br>
+Reviewed-by: Jochen Eisinger <jochen@chromium.org><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Cr-Commit-Position: refs/heads/master@{#513138}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-10-25</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody2">
+                Convert 0 and NULL to nullptr in cc using clang-tidy.
+
+              </a>
+              <div class="collapse" id="commitBody2">
+                <br>Steps to replicate:<br>
+1. Build clang-tidy and clang-apply-replacements as described here: <a href="https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md">https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md</a><br>
+2. Build targets necessary for the change in out/gn.<br>
+3. Generate the compilation database:<br>
+  tools/clang/scripts/generate_compdb.py -p out/gn > compile_commands.json<br>
+4. Run clang-tidy and apply replacements:<br>
+  cd out/gn && PATH_TO_RUN_CLANG_TIDY/run-clang-tidy.py -p ../../ -clang-tidy-binary PATH_TO_CLANG_TIDY_BINARY -clang-apply-replacements-binary PATH_TO_CLANG_APPLY_REPLACEMENTS_BINARY -checks=-*,modernize-use-nullptr -fix -j 8 DIR_TO_CONVERT<br>
+<br>
+Bug: 403854, 776257<br>
+Cq-Include-Trybots: master.tryserver.blink:linux_trusty_blink_rel<br>
+Change-Id: I685c4bbe76669dfa36994f5ae3fcb6e54350982a<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/732304">https://chromium-review.googlesource.com/732304</a><br>
+Reviewed-by: Daniel Cheng <dcheng@chromium.org><br>
+Reviewed-by: danakj <danakj@chromium.org><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Cr-Commit-Position: refs/heads/master@{#511396}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-10-24</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody3">
+                Convert 0 and NULL to nullptr in components.
+
+              </a>
+              <div class="collapse" id="commitBody3">
+                <br>Steps to replicate:<br>
+1. Build clang-tidy and clang-apply-replacements as described here: <a href="https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md">https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md</a><br>
+2. Build targets necessary for the change in out/gn.<br>
+3. Generate the compilation database:<br>
+  tools/clang/scripts/generate_compdb.py -p out/gn > compile_commands.json<br>
+4. Run clang-tidy and apply replacements:<br>
+  cd out/gn && PATH_TO_RUN_CLANG_TIDY/run-clang-tidy.py -p ../../ -clang-tidy-binary PATH_TO_CLANG_TIDY_BINARY -clang-apply-replacements-binary PATH_TO_CLANG_APPLY_REPLACEMENTS_BINARY -checks=-*,modernize-use-nullptr -fix -j 8 DIR_TO_CONVERT<br>
+<br>
+Bug: 403854, 776257<br>
+Change-Id: Ifd0c147ac6866beacffbddb0c56b20502cb4f127<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/732308">https://chromium-review.googlesource.com/732308</a><br>
+Reviewed-by: Jochen Eisinger <jochen@chromium.org><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Cr-Commit-Position: refs/heads/master@{#511144}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-10-19</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody4">
+                Replace 0 with nullptr using clang-tidy.
+
+              </a>
+              <div class="collapse" id="commitBody4">
+                <br>Steps to replicate:<br>
+1. Build clang-tidy and clang-apply-replacements as described here: <a href="https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md">https://chromium.googlesource.com/chromium/src/+/lkcr/docs/clang_tidy.md</a><br>
+2. Build blink in out/gn.<br>
+3. Generate the compilation database:<br>
+  tools/clang/scripts/generate_compdb.py -p out/gn > compile_commands.json<br>
+4. Run clang-tidy and apply replacements:<br>
+  cd out/gn && PATH_TO_RUN_CLANG_TIDY/run-clang-tidy.py -p ../../ -clang-tidy-binary PATH_TO_CLANG_TIDY_BINARY -clang-apply-replacements-binary PATH_TO_CLANG_APPLY_REPLACEMENTS_BINARY -checks=-*,hicpp-use-nullptr -fix -j 8 third_party/WebKit<br>
+<br>
+BUG=<a href="http://crbug.com/403854">403854</a><br>
+<br>
+Cq-Include-Trybots: master.tryserver.chromium.android:android_optional_gpu_tests_rel;master.tryserver.chromium.linux:linux_layout_tests_slimming_paint_v2;master.tryserver.chromium.linux:linux_optional_gpu_tests_rel;master.tryserver.chromium.mac:mac_optional_gpu_tests_rel;master.tryserver.chromium.win:win_optional_gpu_tests_rel<br>
+Change-Id: I4e8f3f82bdfcda6afb89755a20c78cc4cb7aa571<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/720361">https://chromium-review.googlesource.com/720361</a><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Reviewed-by: Jochen Eisinger <jochen@chromium.org><br>
+Reviewed-by: Kentaro Hara <haraken@chromium.org><br>
+Cr-Commit-Position: refs/heads/master@{#510054}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-10-12</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody5">
+                Initialize grayscale_bitmap in PrepareBitmapCopyOutputResult.
+
+              </a>
+              <div class="collapse" id="commitBody5">
+                <br>This fixes MemorySanitizer: use-of-uninitialized-value in<br>
+RenderViewBrowserTest.ConfirmCacheInformationPlumbed.<br>
+<br>
+Change-Id: Id4cb23f1b09636ed972136800c8b8f57377a0ffe<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/715496">https://chromium-review.googlesource.com/715496</a><br>
+Reviewed-by: danakj <danakj@chromium.org><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Cr-Commit-Position: refs/heads/master@{#508356}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-08-24</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody6">
+                Unregister DiscardableSharedMemoryManager from MemoryCoordinatorClientRegistry.
+
+              </a>
+              <div class="collapse" id="commitBody6">
+                <br>BUG=<br>
+<br>
+Change-Id: I12a2f64d3fbefffabbe221e70f43b46e36ecc556<br>
+Reviewed-on: <a href="https://chromium-review.googlesource.com/622790">https://chromium-review.googlesource.com/622790</a><br>
+Reviewed-by: David Reveman <reveman@chromium.org><br>
+Reviewed-by: Kenichi Ishibashi <bashi@chromium.org><br>
+Commit-Queue: Ivan Kotenkov <kotenkov@yandex-team.ru><br>
+Cr-Commit-Position: refs/heads/master@{#496995}
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-02-28</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody7">
+                ASSERT -> DCHECK conversions in platform/image-decoders.
+
+              </a>
+              <div class="collapse" id="commitBody7">
+                <br>Fix wrong assert in ImageDecoder::findRequiredPreviousFrame().<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2723493002">https://codereview.chromium.org/2723493002</a><br>
+Cr-Commit-Position: refs/heads/master@{#453579}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-02-27</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody8">
+                Fix content/common:mojo_bindings dependencies.
+
+              </a>
+              <div class="collapse" id="commitBody8">
+                <br>Move components/payments:payment_app from common deps to mojo_bindings<br>
+public deps since service_worker/service_worker_event_dispatcher.mojom depends on it.<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2717933004">https://codereview.chromium.org/2717933004</a><br>
+Cr-Commit-Position: refs/heads/master@{#453216}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2017-02-13</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody9">
+                Fix SoftwareImageDecodeCache::GetSubrectImageDecode trace name.
+
+              </a>
+              <div class="collapse" id="commitBody9">
+                <br>CQ_INCLUDE_TRYBOTS=master.tryserver.blink:linux_trusty_blink_rel<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2697623002">https://codereview.chromium.org/2697623002</a><br>
+Cr-Commit-Position: refs/heads/master@{#450073}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-12-09</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody10">
+                FindInPage: fix wrong match ordinal after javascript update.
+
+              </a>
+              <div class="collapse" id="commitBody10">
+                <br>BUG=<a href="http://crbug.com/672003">672003</a><br>
+TEST=ParameterizedWebFrameTest.FindInPageJavaScriptUpdatesDOMProperOrdinal<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2548253005">https://codereview.chromium.org/2548253005</a><br>
+Cr-Commit-Position: refs/heads/master@{#437498}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-12-04</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody11">
+                Fix search restart after zero entries.
+
+              </a>
+              <div class="collapse" id="commitBody11">
+                <br>BUG=<a href="http://crbug.com/669983">669983</a><br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2537773008">https://codereview.chromium.org/2537773008</a><br>
+Cr-Commit-Position: refs/heads/master@{#436215}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-12-02</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody12">
+                Refactor TextFinder::scopeStringMatches().
+
+              </a>
+              <div class="collapse" id="commitBody12">
+                <br>Extract startScopingStringMatches() function.<br>
+Use single Member<DeferredScopeStringMatches> instead of a vector.<br>
+<br>
+BUG=<a href="http://crbug.com/669983">669983</a><br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2546513002">https://codereview.chromium.org/2546513002</a><br>
+Cr-Commit-Position: refs/heads/master@{#435906}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-06-21</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody13">
+                ASSERT -> DCHECK conversions in core/editing.
+
+              </a>
+              <div class="collapse" id="commitBody13">
+                <br>ENABLE(ASSERT) -> DCHECK_IS_ON() in core/editing.<br>
+ASSERT_NOT_REACHED() -> NOTREACHED() in core/editing.<br>
+<br>
+BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2082503003">https://codereview.chromium.org/2082503003</a><br>
+Cr-Commit-Position: refs/heads/master@{#400923}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-05-27</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody14">
+                Revert of Replace all occurrences of RELEASE_ASSERT in wtf with CHECK. (patchset #3 id:40001 of https://codereview.chromium.org/1992873004/ )
+
+              </a>
+              <div class="collapse" id="commitBody14">
+                <br>Reason for revert:<br>
+12.5%-56.9% regression in blink_perf.layout at 395611:395672<br>
+<br>
+Original issue's description:<br>
+> Replace all occurrences of RELEASE_ASSERT in wtf with CHECK.<br>
+><br>
+> This is a reland of <a href="https://codereview.chromium.org/1840163002.">https://codereview.chromium.org/1840163002.</a><br>
+><br>
+> Performance regressions were addressed in<br>
+> <a href="https://codereview.chromium.org/1937613002">https://codereview.chromium.org/1937613002</a><br>
+> and <a href="https://codereview.chromium.org/1840163002.">https://codereview.chromium.org/1840163002.</a><br>
+><br>
+> BUG=<a href="http://crbug.com/596760">596760</a>,599867<br>
+><br>
+> Committed: <a href="https://crrev.com/4d0d91ff393599cb9e605b10b09eb59983145cd4">https://crrev.com/4d0d91ff393599cb9e605b10b09eb59983145cd4</a><br>
+> Cr-Commit-Position: refs/heads/master@{#395624}<br>
+<br>
+TBR=haraken@chromium.org,yutak@chromium.org,tkent@chromium.org<br>
+# Not skipping CQ checks because original CL landed more than 1 days ago.<br>
+BUG=<a href="http://crbug.com/596760">596760</a>,599867,614852<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/2016223002">https://codereview.chromium.org/2016223002</a><br>
+Cr-Commit-Position: refs/heads/master@{#396441}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-05-24</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody15">
+                Replace all occurrences of RELEASE_ASSERT in wtf with CHECK.
+
+              </a>
+              <div class="collapse" id="commitBody15">
+                <br>This is a reland of <a href="https://codereview.chromium.org/1840163002.">https://codereview.chromium.org/1840163002.</a><br>
+<br>
+Performance regressions were addressed in<br>
+<a href="https://codereview.chromium.org/1937613002">https://codereview.chromium.org/1937613002</a><br>
+and <a href="https://codereview.chromium.org/1840163002.">https://codereview.chromium.org/1840163002.</a><br>
+<br>
+BUG=<a href="http://crbug.com/596760">596760</a>,599867<br>
+<br>
+Review-Url: <a href="https://codereview.chromium.org/1992873004">https://codereview.chromium.org/1992873004</a><br>
+Cr-Commit-Position: refs/heads/master@{#395624}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-04-25</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody16">
+                Add outputs for DCHECKs in InsertParagraphSeparatorCommand.cpp.
+
+              </a>
+              <div class="collapse" id="commitBody16">
+                <br>This is a followup for <a href="https://codereview.chromium.org/1878473002.">https://codereview.chromium.org/1878473002.</a><br>
+<br>
+BUG=<a href="http://crbug.com/596760">596760</a><br>
+TEST=n/a; no behavior changes<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1914983003">https://codereview.chromium.org/1914983003</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#389678}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-04-19</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody17">
+                ASSERT -> DCHECK in core/editing.
+
+              </a>
+              <div class="collapse" id="commitBody17">
+                <br>BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1878473002">https://codereview.chromium.org/1878473002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#388153}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-04-10</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody18">
+                ASSERT_NOT_REACHED() -> NOTREACHED() in web.
+
+              </a>
+              <div class="collapse" id="commitBody18">
+                <br>BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1878493002">https://codereview.chromium.org/1878493002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#386321}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-04-07</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody19">
+                Remove BLINK_ASSERT() and BLINK_ASSERT_NOT_REACHED() macros.
+
+              </a>
+              <div class="collapse" id="commitBody19">
+                <br>BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1851293002">https://codereview.chromium.org/1851293002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#386010}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-04-01</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody20">
+                RELEASE_ASSERT -> CHECK and ASSERT -> DCHECK in web.
+
+              </a>
+              <div class="collapse" id="commitBody20">
+                <br>BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1839643009">https://codereview.chromium.org/1839643009</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#384626}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-31</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody21">
+                Replace all occurrences of RELEASE_ASSERT in wtf with CHECK.
+
+              </a>
+              <div class="collapse" id="commitBody21">
+                <br>BUG=<a href="http://crbug.com/596760">596760</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1840163002">https://codereview.chromium.org/1840163002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#384213}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-29</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody22">
+                Implement link selection on alt+mouse drag.
+
+              </a>
+              <div class="collapse" id="commitBody22">
+                <br>BUG=<a href="http://crbug.com/244738">244738</a><br>
+TEST=webkit_unit_tests --gtest_filter=LinkSelectionTest.*<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1774123006">https://codereview.chromium.org/1774123006</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#383684}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-24</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody23">
+                Introduce interface for base::HistogramTester in blink.
+
+              </a>
+              <div class="collapse" id="commitBody23">
+                <br>Add tests for BitmapImageMetrics.<br>
+<br>
+This is a reland of <a href="https://codereview.chromium.org/1818153002.">https://codereview.chromium.org/1818153002.</a><br>
+The difference is that now blink_platform_unittests properly<br>
+initialize base::StatisticsRecorder.<br>
+<br>
+BUG=none<br>
+TEST=webkit_unit_tests --gtest_filter=DecodedImage*<br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#382809}<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1832573002">https://codereview.chromium.org/1832573002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#383038}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-23</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody24">
+                Introduce interface for base::HistogramTester in blink.
+
+              </a>
+              <div class="collapse" id="commitBody24">
+                <br>Add tests for BitmapImageMetrics.<br>
+<br>
+BUG=none<br>
+TEST=webkit_unit_tests --gtest_filter=DecodedImage*<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1818153002">https://codereview.chromium.org/1818153002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#382809}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-20</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody25">
+                Use std::sort() instead of qsort() in LayoutTableCell::sortBorderValues().
+
+              </a>
+              <div class="collapse" id="commitBody25">
+                <br>Improve surrounding code.<br>
+<br>
+BUG=none<br>
+TEST=none, no behavior change<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1813333002">https://codereview.chromium.org/1813333002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#382219}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-16</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody26">
+                Remove deprecated functions from comment for IPC::TestSink.
+
+              </a>
+              <div class="collapse" id="commitBody26">
+                <br>Use RunLoop instead of MessageLoop.<br>
+<br>
+BUG=none<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1801093002">https://codereview.chromium.org/1801093002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#381531}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-03-16</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody27">
+                Cleanup after selection gap painting removal.
+
+              </a>
+              <div class="collapse" id="commitBody27">
+                <br>Remove unused functions and code paths.<br>
+<br>
+BUG=<a href="http://crbug.com/471908">471908</a><br>
+TEST=none, no behavior changes<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1805633002">https://codereview.chromium.org/1805633002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#381417}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2016-02-14</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody28">
+                Remove unused and unimplemented adjustVisibleSelection* functions.
+
+              </a>
+              <div class="collapse" id="commitBody28">
+                <br>Cleanup after <a href="https://codereview.chromium.org/1630903005.">https://codereview.chromium.org/1630903005.</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1694823002">https://codereview.chromium.org/1694823002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#375407}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-11-29</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody29">
+                Remove pointless asserts.
+
+              </a>
+              <div class="collapse" id="commitBody29">
+                <br>The condition is always true since m_endIndex is unsigned.<br>
+<br>
+BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1478773002">https://codereview.chromium.org/1478773002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#362073}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-11-10</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody30">
+                Use |FrameSelection::selectedText()| in |WebLocalFrameImpl::selectionAsText()|.
+
+              </a>
+              <div class="collapse" id="commitBody30">
+                <br>Second part of <a href="https://codereview.chromium.org/1377963004/">https://codereview.chromium.org/1377963004/</a> reland.<br>
+<br>
+BUG=<a href="http://crbug.com/545746">545746</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1417523007">https://codereview.chromium.org/1417523007</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#358885}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-11-01</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody31">
+                Use |FrameSelection::selectedText()| where possible.
+
+              </a>
+              <div class="collapse" id="commitBody31">
+                <br>Partially reland <a href="https://codereview.chromium.org/1377963004/,">https://codereview.chromium.org/1377963004/,</a><br>
+except for changes in |WebLocalFrameImpl::selectionAsText()|.<br>
+<br>
+Substitute occurrences of selection -> range -> (text or html) conversions with<br>
+direct selection -> (text or html) conversions using existing functions.<br>
+<br>
+BUG=<a href="http://crbug.com/545746">545746</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1427733003">https://codereview.chromium.org/1427733003</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#357309}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-10-29</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody32">
+                Fix ASSERT in EventHandlerRegistry::updateEventHandlerTargets.
+
+              </a>
+              <div class="collapse" id="commitBody32">
+                <br>Steps to reproduce:<br>
+1. Create an input element with type "range" in a document without frame (e.g. via |DOMParser::parseFromString()|). HTMLInputElement tries to add an event handler to the registry. It cannot add any, but m_hasTouchEventHandler becomes true.<br>
+2. Move the element to a document with a frame.<br>
+3. Remove the element from the last document and wait for all refs pointing to it to be removed. HTMLInputElement removes event handler from registry (which it can do now due to the fact that element has been moved to a document with a frame earlier).<br>
+4. Get ASSERTION FAILED: op == RemoveAll || targets->contains(target) while trying to remove event handler that was not added.<br>
+<br>
+BUG=<a href="http://crbug.com/548626">548626</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1429463002">https://codereview.chromium.org/1429463002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#356839}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-10-29</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody33">
+                Remove DEFINE_DEBUG_ONLY_GLOBAL macro.
+
+              </a>
+              <div class="collapse" id="commitBody33">
+                <br>BUG=<a href="http://crbug.com/548217">548217</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1429713002">https://codereview.chromium.org/1429713002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#356789}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-10-21</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody34">
+                Use FrameSelection::selectedText where possible.
+
+              </a>
+              <div class="collapse" id="commitBody34">
+                <br>Substitute occurrences of selection -> range -> (text or html) conversions with<br>
+direct selection -> (text or html) conversions using existing functions.<br>
+<br>
+BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1377963004">https://codereview.chromium.org/1377963004</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#355247}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-10-20</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody35">
+                Add missing platform and web tests to gn build.
+
+              </a>
+              <div class="collapse" id="commitBody35">
+                <br>BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1410593003">https://codereview.chromium.org/1410593003</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#355016}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-10-19</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody36">
+                Add missing include to timing_function.h
+
+              </a>
+              <div class="collapse" id="commitBody36">
+                <br>BUG=<br>
+CQ_INCLUDE_TRYBOTS=tryserver.blink:linux_blink_rel<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1411393002">https://codereview.chromium.org/1411393002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#354995}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-07-16</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody37">
+                Remove FrameView::resetScrollbars since it is unused and unimplemented.
+
+              </a>
+              <div class="collapse" id="commitBody37">
+                <br>BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1241563003">https://codereview.chromium.org/1241563003</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@199017 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-07-14</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody38">
+                Unify include style.
+
+              </a>
+              <div class="collapse" id="commitBody38">
+                <br>Remove "Source/" part from includes in<br>
+Source/platform/PartitionAllocMemoryDumpProvider.cpp and<br>
+Source/platform/heap/BlinkGCMemoryDumpProvider.cpp.<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1234923005">https://codereview.chromium.org/1234923005</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@198864 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-05-12</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody39">
+                Fix issue with redirectCount.
+
+              </a>
+              <div class="collapse" id="commitBody39">
+                <br>Restore webtiming-origins.html test.<br>
+Modify it to reproduce the issue with redirect count.<br>
+<br>
+BUG=<a href="http://crbug.com/485015">485015</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1128003002">https://codereview.chromium.org/1128003002</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@195248 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-05-09</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody40">
+                Remove wrong assertion.
+
+              </a>
+              <div class="collapse" id="commitBody40">
+                <br>The logic concerning m_devtoolsHost and it's destruction changed<br>
+in <a href="https://codereview.chromium.org/900543003">https://codereview.chromium.org/900543003</a> and we no longer expect<br>
+it to be null during the destructor.<br>
+<br>
+BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1126123005">https://codereview.chromium.org/1126123005</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@195154 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-04-16</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody41">
+                Fix compilation with enable_supervised_users == 0.
+
+              </a>
+              <div class="collapse" id="commitBody41">
+                <br>BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1086213004">https://codereview.chromium.org/1086213004</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#325456}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2015-03-30</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody42">
+                Fix WebDragDestTest.URL on Mac OS 10.10. Format of URLs, returned from NSURL::fileURLWithPath changed, so we need to change our expectations on Mac OS 10.10.
+
+              </a>
+              <div class="collapse" id="commitBody42">
+                <br>BUG=<br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/1041133002">https://codereview.chromium.org/1041133002</a><br>
+<br>
+Cr-Commit-Position: refs/heads/master@{#322780}<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2013-10-25</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody43">
+                Fix bug with js console menu item \ shortcut not always showing console.
+
+              </a>
+              <div class="collapse" id="commitBody43">
+                <br>This happens when<br>
+  web_contents_->GetRenderViewHost()-><br>
+      ExecuteJavascriptInWebFrame(string16(), javascript);<br>
+is called from <br>
+CallClientFunction("InspectorFrontendAPI.showConsole", NULL, NULL, NULL);<br>
+in devtools_window.cc and InspectorFrontendAPI.showConsole is called before\during WebInspector initialization.<br>
+<br>
+So we fix this simply by changing the lastActivePanel setting, which would be used when the initialization is complete.<br>
+<br>
+<br>
+BUG=<a href="http://crbug.com/310467">310467</a><br>
+<br>
+Review URL: <a href="https://codereview.chromium.org/34983004">https://codereview.chromium.org/34983004</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@160572 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2013-09-17</td> <td class="no-wrap-column">kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody44">
+                Fix _check_upward_for_depot_tools in webkit_finder.py.
+
+              </a>
+              <div class="collapse" id="commitBody44">
+                <br>Simple fix in function that, as it seems, wasn't called a single time.<br>
+<br>
+BUG=<br>
+<br>
+Review URL: <a href="https://chromiumcodereview.appspot.com/24123004">https://chromiumcodereview.appspot.com/24123004</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@157886 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+
+          <tr>
+            <td class="no-wrap-column">2013-08-09</td> <td class="no-wrap-column">ivan.kotenkov</td>
+            <td class="text-column">
+              <a class="subject-link" data-toggle="collapse" href="#commitBody45">
+                document.hasFocus() now returns proper value when tab doesn't have focus
+
+              </a>
+              <div class="collapse" id="commitBody45">
+                <br><a href="https://code.google.com/p/chromium/issues/detail?id=64846">https://code.google.com/p/chromium/issues/detail?id=64846</a><br>
+HTMLDocument::hasFocus() now actually checks whether the document has<br>
+focus.<br>
+FocusIsInactive test changed to expect false from hasFocus when view<br>
+is active but doesn't have focus.<br>
+<br>
+Duplicate of <a href="https://codereview.chromium.org/22421002">https://codereview.chromium.org/22421002</a> issue with<br>
+proper base URL<br>
+<br>
+BUG=<a href="http://crbug.com/64846">64846</a><br>
+TEST=provided by the link above<br>
+<br>
+Review URL: <a href="https://chromiumcodereview.appspot.com/22597003">https://chromiumcodereview.appspot.com/22597003</a><br>
+<br>
+git-svn-id: svn://svn.chromium.org/blink/trunk@155810 bbb929c8-8fbe-4397-9dbb-9b2b20218538<br>
+
+              </div>
+            </td>
+            <td class="no-wrap-column">Chromium</td>
+          </tr>
+          </table>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>
+
