@@ -4,6 +4,7 @@ self.addEventListener('install', function(event) {
   console.log("SW: install.");
   // Cache the files here.
   let filesToCache = [
+    '.',
     'index.html',
     'image.jpg'
   ];
@@ -18,5 +19,9 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(caches.match(event.request));
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
 });
