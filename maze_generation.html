@@ -1,0 +1,25 @@
+<style>
+ canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  label {
+    font-size: 15pt;
+  }
+  input[type="radio"] {
+    transform: scale(2);
+  }
+  form {
+    margin: auto;
+    width: 50%;
+  }
+</style>
+<canvas id='canvas'></canvas><br>
+<form action="">
+  <input type="radio" name="algo" value="prim" checked=true onclick="generateAndDraw()"> <label> &nbsp; Walk &emsp;</label>
+  <input type="radio" name="algo" value="kruskal" onclick="generateAndDraw()"> <label> &nbsp; Build </label> <br>
+</form>
+<script src='maze_generation.js'></script>
