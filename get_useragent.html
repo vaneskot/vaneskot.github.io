@@ -1,0 +1,6 @@
+<div id='useragent'></div>
+<div id='serviceworker'></div>
+<script>
+  document.getElementById('useragent').innerText = navigator.userAgent;
+  document.getElementById('serviceworker').innerText = Boolean(navigator.serviceWorker);
+</script>
