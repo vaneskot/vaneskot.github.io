@@ -1,6 +1,11 @@
 (function () {
   const SIDE = 30;
   const DELAY = 10;
+  const GENERATORS_TABLE = {
+    'prim' : mstPrimSleepy,
+    'kruskal' : mstKruskalSleepy,
+    'dijkstra' : dijkstra
+  };
   const canvas = document.getElementById('canvas');
   let globalTimeout;
 
@@ -17,10 +22,13 @@
     canvas.height = canvasSide;
 
     const radio = document.querySelector('input[name="algo"]:checked');
-    const generator = radio.value === 'prim' ? mstPrimSleepy : mstKruskalSleepy;
+    const generator = GENERATORS_TABLE[radio.value];
+    if (!generator)
+      return;
 
-    const grid = generateGrid(SIDE);
-    generator(grid, SIDE);
+    const gridEdges = generateGrid(SIDE);
+    const gridAdjacency = convertEdgesToGraph(gridEdges, SIDE);
+    generator(gridEdges, gridAdjacency, SIDE);
   }
 
   function getVertex(side, i, j) {
@@ -61,6 +69,8 @@
   }
 
   function popHeap(heap, cmp) {
+    if (heap.length == 1)
+      return heap.pop();
     let res = heap[0];
     heap[0] = heap.pop();
     let cur = 0;
@@ -95,8 +105,58 @@
     return graph;
   }
 
-  function mstPrimSleepy(edges, side) {
-    const graph = convertEdgesToGraph(edges, side);
+  function dijkstra(edges, graph, side) {
+    const cmp = (l, r) => l[2] <= r[2];
+    const vertexCount = side * side;
+    let cur = Math.round((vertexCount - 1) * Math.random());
+    let heap = [];
+
+    let INF = 1000 * vertexCount;
+    let distances = [];
+    let processed = [];
+    for (let i = 0; i < vertexCount; ++i) {
+      distances.push(INF);
+      processed.push(0);
+    }
+
+    processed[cur] = 1;
+    distances[cur] = 0;
+    graph[cur].forEach(edge => {
+      let [v, w] = edge;
+      let dist = distances[cur] + w;
+      if (dist < distances[v]) {
+        distances[v] = dist;
+        pushHeap(heap, [cur, v, w], cmp)
+      }
+    });
+
+    let resEdges = [];
+    function nextEdge() {
+      let edge = popHeap(heap, cmp);
+      while (heap.length && processed[edge[1]]) {
+        edge = popHeap(heap, cmp);
+      }
+      if (!heap.length)
+        return;
+      cur = edge[1];
+      processed[cur] = 1;
+      resEdges.push(edge);
+      graph[cur].forEach(edge => {
+        let [v, w] = edge;
+        let dist = distances[cur] + w;
+        if (dist < distances[v]) {
+          distances[v] = dist;
+          pushHeap(heap, [cur, v, w], cmp)
+        }
+      });
+      drawGrid(canvas, resEdges, side);
+      if (heap.length)
+        globalTimeout = setTimeout(nextEdge, DELAY);
+    }
+    nextEdge();
+  }
+
+  function mstPrimSleepy(edges, graph, side) {
     const cmp = (l, r) => l[2] <= r[2];
     const vertexCount = side * side;
 
@@ -147,7 +207,7 @@
     return x;
   }
 
-  function mstKruskalSleepy(edges, side) {
+  function mstKruskalSleepy(edges, graph, side) {
     edges.sort((x, y) => x[2] - y[2]);
     let edgeIndex = 0;
     let mstEdges = [];
