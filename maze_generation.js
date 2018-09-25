@@ -8,6 +8,7 @@
   };
   const canvas = document.getElementById('canvas');
   let globalTimeout;
+  let fixedRandom = false;
 
   document.getElementsByName('algo').forEach(element => element.onclick = generateAndDraw);
 
@@ -21,6 +22,7 @@
     canvas.width = canvasSide;
     canvas.height = canvasSide;
 
+    fixedRandom = document.getElementById('random').checked;
     const radio = document.querySelector('input[name="algo"]:checked');
     const generator = GENERATORS_TABLE[radio.value];
     if (!generator)
@@ -41,12 +43,20 @@
 
   function generateGrid(side) {
     let edges = []
+    let seed = 1;
+    function getSeededRandom() {
+      seed = seed * 16807 % 2147483647;
+      return (seed - 1) / 2147483646;
+    }
+    function getNext() {
+      return fixedRandom ? getSeededRandom() : Math.random();
+    }
     for (let i = 0; i < side; ++i) {
       for (let j = 0; j < side; ++j) {
         if (i < side - 1)
-          edges.push([getVertex(side, i, j), getVertex(side, i + 1, j), Math.random()]);
+          edges.push([getVertex(side, i, j), getVertex(side, i + 1, j), getNext()]);
         if (j < side - 1)
-          edges.push([getVertex(side, i, j), getVertex(side, i, j + 1), Math.random()]);
+          edges.push([getVertex(side, i, j), getVertex(side, i, j + 1), getNext()]);
       }
     }
     return edges;
