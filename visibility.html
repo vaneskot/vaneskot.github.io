@@ -1,0 +1,11 @@
+<script>
+  function handleVisibilityChange() {
+  if (document.hidden) {
+    console.log("Document is hidden");
+  } else  {
+    console.log("Document is visible");
+  }
+}
+
+document.addEventListener("visibilitychange", handleVisibilityChange, false);
+</script>
