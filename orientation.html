@@ -1,0 +1,11 @@
+<div id='res'></div>
+<button onclick='changeOrientation()'>Change orientation</button>
+<script>
+  function report(res) {
+    document.getElementById('res').innerText = res;
+  }
+  function changeOrientation() {
+    screen.orientation.lock('landscape-primary').then(report);
+  }
+  changeOrientation();
+</script>
