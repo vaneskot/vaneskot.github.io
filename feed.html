@@ -1,0 +1,35 @@
+<style>
+.collapsed {
+  display: none;
+}
+.expanded {
+  display: block;
+  background-color: #0069D9AA;
+}
+.changing {
+  display: block;
+  background-color: red;
+}
+</style>
+<div id='div' style="width: 100%; height: 10%;" class="expanded"></div>
+<script>
+  function handleStateChange(newState) {
+    console.log("state changed to foo " + newState);
+    let div = document.getElementById('div');
+    if (newState == "EXPANDED") {
+      console.log("making visible");
+      div.className = "";
+      div.classList.add("expanded");
+    } else if (newState == "COLLAPSED") {
+      console.log("making invisible");
+      div.className = "";
+      div.classList.add("collapsed");
+    } else {
+      console.log("making red");
+      div.className = "";
+      div.classList.add("changing");
+    }
+  }
+  YandexApplicationsAPIBackend.on("pageStateChanged", handleStateChange);
+  handleStateChange(YandexApplicationsAPIBackend.getPageState());
+</script>
