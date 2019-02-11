@@ -1,4 +1,5 @@
 <div style="background-color:red; width: 100%; height: 100%;"></div>
 <script>
   document.documentElement.requestFullscreen();
+  screen.orientation.lock("landscape").then(x => { console.log("locked ", x); }).catch(err => { console.log("could not lock ", err.code, err.message); });
 </script>
