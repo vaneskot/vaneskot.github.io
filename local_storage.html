@@ -1,0 +1,10 @@
+<div id='res'></div>
+<script>
+  var res = document.getElementById('res');
+  if (window.localStorage.getItem('foo')) {
+    res.innerHTML = "Item found in local storage.";
+  } else {
+    window.localStorage.setItem('foo', "1");
+    res.innerHTML = "Item written to local storage.";
+  }
+</script>
